@@ -10,12 +10,18 @@ class GradeService
 {
     //tao
     public function saveGrade(StoreGradeRequest $request){
-        return Grade::create($request->all());
+        return Grade::create($request->validate([
+            'id'=>'required',
+            'name'=>'required'
+        ]));
     }
     //sua
     public function updateGrade(UpdateGradeRequest $request, $id){
         $grade = Grade::find($id);
-        return $grade->update($request->all());
+        return $grade->update($request->validate([
+            'id'=>'required',
+            'name'=>'required'
+        ]));
     }
     //show/id
     public function getById($id) {
